@@ -8,20 +8,40 @@
 
 import UIKit
 
-class ImageGalleryTableViewController: UITableViewController {
+class ImageGalleryTableViewController: UITableViewController{
+    
+    
+    @IBOutlet var imageGalleryTableView: UITableView!
+    
+    private var categories = [categoryInfo]()
 
-    private var categories = ["My Photos", "Instagram", "Facebook", "Recently Deleted"]
+    private struct categoryInfo{
+        var image: UIImage?
+        var name: String
+        var number: Int
+        var categoryImages: [UIImage]?
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        imageGalleryTableView.delegate = self
+        imageGalleryTableView.dataSource = self
+        categories.append(categoryInfo(image: UIImage(named: "img"), name: "My Photos", number: 1400, categoryImages: []))
+        categories.append(categoryInfo(image: UIImage(named: "img"), name: "Facebook", number: 1200, categoryImages: []))
+        categories.append(categoryInfo(image: UIImage(named: "img"), name: "Instagram", number: 2400, categoryImages: []))
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        if splitViewController?.preferredDisplayMode != .primaryOverlay {
+            splitViewController?.preferredDisplayMode = .primaryOverlay
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -33,10 +53,13 @@ class ImageGalleryTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! ImageGalleryTableViewCell
+        
         // Configure the cell...
-
+        cell.cellImage.image = categories[indexPath.row].image
+        cell.cellName.text = categories[indexPath.row].name
+        cell.cellNumber.text = String(categories[indexPath.row].number)
+//        cell.cellImage.layer.cornerRadius = cell.cellImage.bounds.width / 6
         return cell
     }
 

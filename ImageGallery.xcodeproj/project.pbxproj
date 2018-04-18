@@ -14,6 +14,8 @@
 		CDA06FD520856FB50056FA31 /* ImageGalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA06FD420856FB50056FA31 /* ImageGalleryCollectionViewCell.swift */; };
 		CDA06FD720856FD50056FA31 /* ImageGalleryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA06FD620856FD50056FA31 /* ImageGalleryCollectionViewController.swift */; };
 		CDA06FD920856FED0056FA31 /* ImageGalleryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA06FD820856FED0056FA31 /* ImageGalleryTableViewController.swift */; };
+		CDA06FDB208580390056FA31 /* ImageGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA06FDA208580390056FA31 /* ImageGalleryTableViewCell.swift */; };
+		CDA06FDF208588F40056FA31 /* img.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDA06FDE208588F40056FA31 /* img.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		CDA06FD420856FB50056FA31 /* ImageGalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		CDA06FD620856FD50056FA31 /* ImageGalleryCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryCollectionViewController.swift; sourceTree = "<group>"; };
 		CDA06FD820856FED0056FA31 /* ImageGalleryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryTableViewController.swift; sourceTree = "<group>"; };
+		CDA06FDA208580390056FA31 /* ImageGalleryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryTableViewCell.swift; sourceTree = "<group>"; };
+		CDA06FDE208588F40056FA31 /* img.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +64,10 @@
 			children = (
 				CDA06FC520856D610056FA31 /* Main.storyboard */,
 				CDA06FD420856FB50056FA31 /* ImageGalleryCollectionViewCell.swift */,
+				CDA06FDA208580390056FA31 /* ImageGalleryTableViewCell.swift */,
 				CDA06FD620856FD50056FA31 /* ImageGalleryCollectionViewController.swift */,
 				CDA06FD820856FED0056FA31 /* ImageGalleryTableViewController.swift */,
+				CDA06FDE208588F40056FA31 /* img.jpg */,
 				CDA06FD320856E2C0056FA31 /* Supprting Files */,
 				CDA06FCD20856D640056FA31 /* Info.plist */,
 			);
@@ -137,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDA06FCC20856D640056FA31 /* LaunchScreen.storyboard in Resources */,
+				CDA06FDF208588F40056FA31 /* img.jpg in Resources */,
 				CDA06FC920856D640056FA31 /* Assets.xcassets in Resources */,
 				CDA06FC720856D610056FA31 /* Main.storyboard in Resources */,
 			);
@@ -149,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDA06FDB208580390056FA31 /* ImageGalleryTableViewCell.swift in Sources */,
 				CDA06FD720856FD50056FA31 /* ImageGalleryCollectionViewController.swift in Sources */,
 				CDA06FC220856D610056FA31 /* AppDelegate.swift in Sources */,
 				CDA06FD920856FED0056FA31 /* ImageGalleryTableViewController.swift in Sources */,

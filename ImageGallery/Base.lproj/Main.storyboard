@@ -22,26 +22,26 @@
             </objects>
             <point key="canvasLocation" x="-550" y="391"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Image Gallery Table View Controller-->
         <scene sceneID="6DA-FE-k38">
             <objects>
-                <tableViewController id="Ik1-Ux-gT8" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nN3-vr-Wlg">
+                <tableViewController id="Ik1-Ux-gT8" customClass="ImageGalleryTableViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nN3-vr-Wlg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="100" id="mDK-Vb-6i0">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="TableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TableViewCell" rowHeight="100" id="mDK-Vb-6i0" customClass="ImageGalleryTableViewCell" customModule="ImageGallery" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mDK-Vb-6i0" id="2qZ-Ok-DzB">
-                                    <rect key="frame" x="0.0" y="0.0" width="286" height="99.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="286" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFE-h5-I3r">
                                             <rect key="frame" x="8" y="8" width="270" height="83.5"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MvA-Q8-WGx">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img" translatesAutoresizingMaskIntoConstraints="NO" id="MvA-Q8-WGx">
                                                     <rect key="frame" x="4" y="4" width="103" height="75"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="103" id="1th-oU-d9v"/>
@@ -71,7 +71,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" red="0.92455524206161499" green="0.94808083772659302" blue="0.78867298364639282" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="MvA-Q8-WGx" firstAttribute="top" secondItem="iFE-h5-I3r" secondAttribute="top" constant="4" id="6DM-Rn-F3a"/>
                                                 <constraint firstAttribute="trailing" secondItem="IWz-UT-6pa" secondAttribute="trailing" constant="-15" id="KtK-sG-Em1"/>
@@ -93,6 +93,12 @@
                                         <constraint firstItem="r5E-fI-ZNZ" firstAttribute="top" secondItem="2qZ-Ok-DzB" secondAttribute="top" constant="12" id="h2O-NH-mTc"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellImage" destination="MvA-Q8-WGx" id="hfw-Va-fXI"/>
+                                    <outlet property="cellName" destination="r5E-fI-ZNZ" id="oyQ-5d-Lse"/>
+                                    <outlet property="cellNumber" destination="IWz-UT-6pa" id="YJc-FH-bS3"/>
+                                    <outlet property="cellView" destination="iFE-h5-I3r" id="Jog-uJ-Chn"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -101,6 +107,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="zfh-tq-mQs"/>
+                    <connections>
+                        <outlet property="imageGalleryTableView" destination="nN3-vr-Wlg" id="kAw-56-EKQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CTS-rE-ewg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -170,4 +179,7 @@
             <point key="canvasLocation" x="574.8046875" y="-398.4375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="img" width="960" height="447"/>
+    </resources>
 </document>
