@@ -41,12 +41,10 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFE-h5-I3r">
                                             <rect key="frame" x="8" y="8" width="270" height="83.5"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img" translatesAutoresizingMaskIntoConstraints="NO" id="MvA-Q8-WGx">
-                                                    <rect key="frame" x="4" y="4" width="103" height="75"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="103" id="1th-oU-d9v"/>
-                                                        <constraint firstAttribute="height" constant="75" id="ESI-KQ-4DP"/>
-                                                    </constraints>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img" translatesAutoresizingMaskIntoConstraints="NO" id="MvA-Q8-WGx">
+                                                    <rect key="frame" x="4" y="4" width="85" height="75"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" red="0.96035724878311157" green="0.94955843687057495" blue="0.83952611684799194" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,950" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWz-UT-6pa">
                                                     <rect key="frame" x="115" y="52" width="170" height="27"/>
@@ -73,14 +71,9 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.92455524206161499" green="0.94808083772659302" blue="0.78867298364639282" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstItem="MvA-Q8-WGx" firstAttribute="top" secondItem="iFE-h5-I3r" secondAttribute="top" constant="4" id="6DM-Rn-F3a"/>
                                                 <constraint firstAttribute="trailing" secondItem="IWz-UT-6pa" secondAttribute="trailing" constant="-15" id="KtK-sG-Em1"/>
-                                                <constraint firstItem="MvA-Q8-WGx" firstAttribute="leading" secondItem="iFE-h5-I3r" secondAttribute="leading" constant="4" id="NUz-nT-5Cg"/>
                                                 <constraint firstItem="IWz-UT-6pa" firstAttribute="top" secondItem="r5E-fI-ZNZ" secondAttribute="bottom" constant="1" id="Rzx-uf-nNt"/>
-                                                <constraint firstItem="IWz-UT-6pa" firstAttribute="leading" secondItem="MvA-Q8-WGx" secondAttribute="trailing" constant="8" id="Sou-M9-kGM"/>
-                                                <constraint firstItem="r5E-fI-ZNZ" firstAttribute="leading" secondItem="MvA-Q8-WGx" secondAttribute="trailing" constant="8" id="mUV-0E-PDx"/>
                                                 <constraint firstAttribute="bottom" secondItem="IWz-UT-6pa" secondAttribute="bottom" constant="4.5" id="u3I-62-iVz"/>
-                                                <constraint firstAttribute="bottom" secondItem="MvA-Q8-WGx" secondAttribute="bottom" constant="4" id="wxT-ML-OZJ"/>
                                             </constraints>
                                         </view>
                                     </subviews>

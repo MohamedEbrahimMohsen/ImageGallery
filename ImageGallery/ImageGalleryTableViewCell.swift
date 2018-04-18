@@ -12,12 +12,13 @@ class ImageGalleryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellView: UIView!{
         didSet{
-            cellView.layer.cornerRadius = cellView.bounds.width / 6
+            cellView.layer.cornerRadius = cellView.bounds.height / 2
         }
     }
     @IBOutlet weak var cellImage: UIImageView!{
         didSet{
-            cellImage.layer.cornerRadius = cellImage.bounds.width / 6
+            cellImage.layer.masksToBounds = true
+            cellImage.layer.cornerRadius = cellImage.bounds.height / 2
         }
     }
     @IBOutlet weak var cellName: UILabel!

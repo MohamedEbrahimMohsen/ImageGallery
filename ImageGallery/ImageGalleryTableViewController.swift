@@ -59,7 +59,6 @@ class ImageGalleryTableViewController: UITableViewController{
         cell.cellImage.image = categories[indexPath.row].image
         cell.cellName.text = categories[indexPath.row].name
         cell.cellNumber.text = String(categories[indexPath.row].number)
-//        cell.cellImage.layer.cornerRadius = cell.cellImage.bounds.width / 6
         return cell
     }
 
