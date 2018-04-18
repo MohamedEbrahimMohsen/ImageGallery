@@ -12,10 +12,14 @@ class ImageGalleryTableViewController: UITableViewController{
     
     
     @IBOutlet var imageGalleryTableView: UITableView!
+    @IBAction func addNewCategory(_ sender: UIBarButtonItem) {
+        categories.append(categoryInfo(image: UIImage(named: "img"), name: "Untitled".madeUnique(withRespectTo: categories), number: 1400, categoryImages: []))
+        imageGalleryTableView.reloadData()
+    }
     
     private var categories = [categoryInfo]()
 
-    private struct categoryInfo{
+    struct categoryInfo{
         var image: UIImage?
         var name: String
         var number: Int
@@ -26,16 +30,16 @@ class ImageGalleryTableViewController: UITableViewController{
         super.viewDidLoad()
         imageGalleryTableView.delegate = self
         imageGalleryTableView.dataSource = self
-        categories.append(categoryInfo(image: UIImage(named: "img"), name: "My Photos", number: 1400, categoryImages: []))
-        categories.append(categoryInfo(image: UIImage(named: "img"), name: "Facebook", number: 1200, categoryImages: []))
-        categories.append(categoryInfo(image: UIImage(named: "img"), name: "Instagram", number: 2400, categoryImages: []))
+        categories.append(categoryInfo(image: UIImage(named: "img"), name: "My Graduation Project Photos", number: 1400, categoryImages: [UIImage(named: "img")!]))
+        categories.append(categoryInfo(image: UIImage(named: "img"), name: "Facebook", number: 1200, categoryImages: [UIImage(named: "img")!,UIImage(named: "img")!]))
+        categories.append(categoryInfo(image: UIImage(named: "img"), name: "Instagram", number: 2400, categoryImages: [UIImage(named: "img")!,UIImage(named: "img")!,UIImage(named: "img")!]))
     }
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        if splitViewController?.preferredDisplayMode != .primaryOverlay {
-            splitViewController?.preferredDisplayMode = .primaryOverlay
-        }
+//        if splitViewController?.preferredDisplayMode != .primaryOverlay {
+//            splitViewController?.preferredDisplayMode = .primaryOverlay
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -97,14 +101,38 @@ class ImageGalleryTableViewController: UITableViewController{
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showImagesForSelectedCategory"{
+            if let tableViewCell = sender as? ImageGalleryTableViewCell{
+                if let collectionViewController = segue.destination as? ImageGalleryCollectionViewController{
+                    if let indexPath = imageGalleryTableView.indexPath(for: tableViewCell){
+                        assert(categories.indices.contains(indexPath.row), "ImageGalleryTableViewController.Prepare: Row# \(indexPath.row) is not a valid row")
+                        let category = categories[indexPath.row]
+                        collectionViewController.cellImages = category.categoryImages!
+                    }
+                }
+            }
+        }
     }
-    */
 
+}
+
+
+extension String {
+    func madeUnique(withRespectTo otherCatrgories: [ImageGalleryTableViewController.categoryInfo]) -> String {
+        var possiblyUnique = self
+        var uniqueNumber = 1
+        var otherStrings = [String]()
+        for category in otherCatrgories{
+            otherStrings.append(category.name)
+        }
+        while otherStrings.contains(possiblyUnique) {
+            possiblyUnique = self + " \(uniqueNumber)"
+            uniqueNumber += 1
+        }
+        return possiblyUnique
+    }
 }

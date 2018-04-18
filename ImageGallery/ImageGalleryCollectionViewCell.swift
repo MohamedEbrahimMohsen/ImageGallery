@@ -10,6 +10,12 @@ import UIKit
 
 class ImageGalleryCollectionViewCell: UICollectionViewCell {
     
-    var image = UIImage()
-    
+    @IBOutlet weak var collectionViewCellImage: UIImageView!{
+        didSet{
+            collectionViewCellImage.layer.masksToBounds = true
+            collectionViewCellImage.layer.cornerRadius = 15.0 //some of good rounded radius value
+        }
+    }
+//    var image = UIImage()
+//    
 }
