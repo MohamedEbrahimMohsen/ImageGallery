@@ -30,9 +30,9 @@ class ImageGalleryTableViewController: UITableViewController{
         super.viewDidLoad()
         imageGalleryTableView.delegate = self
         imageGalleryTableView.dataSource = self
-        categories.append(categoryInfo(image: UIImage(named: "img"), name: "My Graduation Project Photos", number: 1400, categoryImages: [UIImage(named: "img")!]))
-        categories.append(categoryInfo(image: UIImage(named: "img"), name: "Facebook", number: 1200, categoryImages: [UIImage(named: "img")!,UIImage(named: "img")!]))
-        categories.append(categoryInfo(image: UIImage(named: "img"), name: "Instagram", number: 2400, categoryImages: [UIImage(named: "img")!,UIImage(named: "img")!,UIImage(named: "img")!]))
+        categories.append(categoryInfo(image: UIImage(named: "img.jpg"), name: "My Graduation Project Photos", number: 1400, categoryImages: [UIImage(named: "img.jpg")!]))
+        categories.append(categoryInfo(image: UIImage(named: "img2.jpg"), name: "Facebook", number: 1200, categoryImages: [UIImage(named: "img")!,UIImage(named: "img2.jpg")!]))
+        categories.append(categoryInfo(image: UIImage(named: "img3.jpg"), name: "Instagram", number: 2400, categoryImages: [UIImage(named: "img")!,UIImage(named: "img2.jpg")!,UIImage(named: "img3.jpg")!]))
     }
 
     override func viewWillLayoutSubviews() {
@@ -107,11 +107,16 @@ class ImageGalleryTableViewController: UITableViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showImagesForSelectedCategory"{
             if let tableViewCell = sender as? ImageGalleryTableViewCell{
-                if let collectionViewController = segue.destination as? ImageGalleryCollectionViewController{
+                var destination = segue.destination
+                if let navigationControl = destination as? UINavigationController{
+                    destination = navigationControl.visibleViewController ?? navigationControl
+                }
+                if let collectionViewController = destination as? ImageGalleryCollectionViewController{
                     if let indexPath = imageGalleryTableView.indexPath(for: tableViewCell){
                         assert(categories.indices.contains(indexPath.row), "ImageGalleryTableViewController.Prepare: Row# \(indexPath.row) is not a valid row")
                         let category = categories[indexPath.row]
                         collectionViewController.cellImages = category.categoryImages!
+                        collectionViewController.title = category.name
                     }
                 }
             }

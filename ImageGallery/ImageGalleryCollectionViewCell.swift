@@ -10,12 +10,27 @@ import UIKit
 
 class ImageGalleryCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var collectionViewCellImage: UIImageView!{
+    var isMarked: Bool = false{
         didSet{
-            collectionViewCellImage.layer.masksToBounds = true
-            collectionViewCellImage.layer.cornerRadius = 15.0 //some of good rounded radius value
+            isMarked == true ? markImageLabel.setTitle("✔️", for: .normal) : markImageLabel.setTitle("", for: .normal)
         }
     }
-//    var image = UIImage()
-//    
+    @IBOutlet weak var markImageLabel: UIButton!{
+        didSet{
+            markImageLabel.layer.masksToBounds = true
+            markImageLabel.layer.cornerRadius = markImageLabel.bounds.width / 2
+        }
+    }
+    @IBOutlet weak var collectionViewCellImage: UIImageView!
+//    {
+//        didSet{
+//            collectionViewCellImage.layer.masksToBounds = true
+//            collectionViewCellImage.layer.cornerRadius = 15.0 //some of good rounded radius value
+//        }
+//    }
+    @IBAction func markImage(_ sender: UIButton) {
+        isMarked = !isMarked
+        //isMarked == true ? sender.setTitle("✔️", for: .normal) : sender.setTitle("", for: .normal)
+    }
+ 
 }

@@ -22,6 +22,64 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
             imageGalleryCollectionView.dataSource = self
         }
     }
+    @IBAction func resizeCells(_ sender: UIPinchGestureRecognizer) {
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let numberOfCellsPerRow: Int = Int(imageGalleryCollectionView.bounds.width / 100) //get the max number of elemts with 100px width as a startup
+        let itemSize = imageGalleryCollectionView.bounds.width / CGFloat(numberOfCellsPerRow) - 1
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: itemSize, height: itemSize)
+        layout.minimumInteritemSpacing = 1
+        layout.minimumLineSpacing = 1
+        imageGalleryCollectionView.collectionViewLayout = layout
+    }
+    
+    @IBOutlet weak var editCancelLabel: UIBarButtonItem!
+    @IBOutlet weak var deleteLabel: UIBarButtonItem!
+    private var isEditMode = true
+    @IBAction func editCancelBtn(_ sender: UIBarButtonItem) {
+        if isEditMode == true{ //So Swith to deleteMode
+            showOrHideAbilityMarkIcons(isEnable: true)
+            deleteLabel.isEnabled = true
+            deleteLabel.tintColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 1)
+            editCancelLabel.title = "✖️"
+        }else{
+            showOrHideAbilityMarkIcons(isEnable: false)
+            deleteLabel.isEnabled = false
+            deleteLabel.tintColor = .clear
+            editCancelLabel.title = "✏️"
+        }
+        isEditMode = !isEditMode
+    }
+    
+    @IBAction func deleteImageBtn(_ sender: UIBarButtonItem) {
+        var indexPaths = [IndexPath]()
+        for indexPath in imageGalleryCollectionView.indexPathsForVisibleItems{
+            let cell = imageGalleryCollectionView.cellForItem(at: indexPath) as? ImageGalleryCollectionViewCell
+            if cell?.isMarked == true{
+                indexPaths.append(indexPath)
+            }
+        }
+        indexPaths = indexPaths.sorted(by: >)
+        for indexpath in indexPaths{
+            imageGalleryCollectionView.performBatchUpdates({
+                cellImages.remove(at: indexpath.item)
+                imageGalleryCollectionView.deleteItems(at: [indexpath])
+            })
+        }
+    }
+    private func showOrHideAbilityMarkIcons(isEnable: Bool){
+        for indexPath in imageGalleryCollectionView.indexPathsForVisibleItems{
+            let cell = imageGalleryCollectionView.cellForItem(at: indexPath) as? ImageGalleryCollectionViewCell
+            cell?.markImageLabel.isHidden = !isEnable
+            cell?.isMarked = false // i need all be clear when i press edit or cancel
+        }
+    }
+    @IBAction func deleteBtn(_ sender: UIBarButtonItem) {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,11 +121,6 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         return cell
     }
 
-    
-    
-    
-    
-    
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         session.localContext = collectionView
         return dragItems(at: indexPath)
@@ -177,13 +230,20 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
     
     
     // MARK: - Navigation
-    /*
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using [segue destinationViewController].
-     // Pass the selected object to the new view controller.
-     }
-     */
+        if segue.identifier == "showSelectedImage"{
+            if let collectionViewViewCell = sender as? ImageGalleryCollectionViewCell{
+                if let collectionViewController = segue.destination as? ImageDetailsViewController{
+                    if let indexPath = imageGalleryCollectionView.indexPath(for: collectionViewViewCell){
+                        assert(cellImages.indices.contains(indexPath.item), "ImageGalleryCollectionViewController.Prepare: Row# \(indexPath.row) is not a valid item")
+                        let image = cellImages[indexPath.item]
+                        collectionViewController.image = image
+                    }
+                }
+            }
+        }
+    }
     
     // MARK: UICollectionViewDelegate
 
