@@ -86,6 +86,8 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
                 ImageGalleryTableViewController.RecentlyDeleted[self.title!] =
                 [cellImages[indexpath.item]] :
             ImageGalleryTableViewController.RecentlyDeleted[self.title!]!.append(cellImages[indexpath.item])
+                let TVC = ImageGalleryTableViewController()
+                TVC.addDeleted(image: cellImages[indexpath.item], withCategoryName: self.title!)
                 cellImages.remove(at: indexpath.item)
                 imageGalleryCollectionView.deleteItems(at: [indexpath])
             })
