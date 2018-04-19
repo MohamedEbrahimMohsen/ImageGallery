@@ -10,7 +10,14 @@ import UIKit
 
 class ImageGalleryTableViewController: UITableViewController{
     
-    
+    static var RecentlyDeleted = [String:[UIImage]]()
+    func revertCategory(image: UIImage, withCategoryName name: String){
+        if categories.filter({$0.name == name}).count == 1{
+            for index in categories.indices{
+                if (categories[index].name == name){categories[index].categoryImages?.append(image)}
+            }
+        }
+    }
     @IBOutlet var imageGalleryTableView: UITableView!
     @IBAction func addNewCategory(_ sender: UIBarButtonItem) {
         categories.append(categoryInfo(image: UIImage(named: "img"), name: "Untitled".madeUnique(withRespectTo: categories), number: 1400, categoryImages: []))
@@ -32,7 +39,7 @@ class ImageGalleryTableViewController: UITableViewController{
         imageGalleryTableView.dataSource = self
         categories.append(categoryInfo(image: UIImage(named: "img.jpg"), name: "My Graduation Project Photos", number: 1400, categoryImages: [UIImage(named: "img.jpg")!]))
         categories.append(categoryInfo(image: UIImage(named: "img2.jpg"), name: "Facebook", number: 1200, categoryImages: [UIImage(named: "img")!,UIImage(named: "img2.jpg")!]))
-        categories.append(categoryInfo(image: UIImage(named: "img3.jpg"), name: "Instagram", number: 2400, categoryImages: [UIImage(named: "img")!,UIImage(named: "img2.jpg")!,UIImage(named: "img3.jpg")!]))
+        categories.append(categoryInfo(image: UIImage(named: "img3.jpg"), name: "Instagram", number: 2400, categoryImages: [UIImage(named: "img")!,UIImage(named: "img2.jpg")!,UIImage(named: "img3.jpg")!,UIImage(named: "img")!,UIImage(named: "img2.jpg")!,UIImage(named: "img3.jpg")!,UIImage(named: "img")!,UIImage(named: "img2.jpg")!,UIImage(named: "img3.jpg")!]))
     }
 
     override func viewWillLayoutSubviews() {
@@ -115,8 +122,10 @@ class ImageGalleryTableViewController: UITableViewController{
                     if let indexPath = imageGalleryTableView.indexPath(for: tableViewCell){
                         assert(categories.indices.contains(indexPath.row), "ImageGalleryTableViewController.Prepare: Row# \(indexPath.row) is not a valid row")
                         let category = categories[indexPath.row]
-                        collectionViewController.cellImages = category.categoryImages!
-                        collectionViewController.title = category.name
+                        DispatchQueue.global(qos: .userInitiated).async{
+                            collectionViewController.cellImages = category.categoryImages!
+                            collectionViewController.title = category.name
+                        }
                     }
                 }
             }
@@ -141,3 +150,18 @@ extension String {
         return possiblyUnique
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

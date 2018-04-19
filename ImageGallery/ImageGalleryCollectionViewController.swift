@@ -23,7 +23,23 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         }
     }
     @IBAction func resizeCells(_ sender: UIPinchGestureRecognizer) {
-        
+        if sender.state == .changed || sender.state == .ended{
+                if var itemSize = (imageGalleryCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize.width{
+                    itemSize = itemSize * sender.scale
+                    if itemSize >= min((imageGalleryCollectionView.bounds.width), (imageGalleryCollectionView.bounds.height)){
+                        itemSize = min((imageGalleryCollectionView.bounds.width), (imageGalleryCollectionView.bounds.height))
+                    }else if itemSize < 100 { itemSize = 100 }
+                    let numberOfCellsPerRow: Int = Int((imageGalleryCollectionView.bounds.width) / itemSize) //get the max number of elemts with 100px width as a startup
+                    itemSize = (imageGalleryCollectionView.bounds.width) / CGFloat(numberOfCellsPerRow) - 1
+                    DispatchQueue.main.async{ [weak self] in
+                        let layout = UICollectionViewFlowLayout()
+                        layout.itemSize = CGSize(width: itemSize, height: itemSize)
+                        layout.minimumInteritemSpacing = 1
+                        layout.minimumLineSpacing = 1
+                        self?.imageGalleryCollectionView.collectionViewLayout = layout
+                    }
+                }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,6 +51,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         layout.minimumLineSpacing = 1
         imageGalleryCollectionView.collectionViewLayout = layout
     }
+
     
     @IBOutlet weak var editCancelLabel: UIBarButtonItem!
     @IBOutlet weak var deleteLabel: UIBarButtonItem!
@@ -65,6 +82,10 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         indexPaths = indexPaths.sorted(by: >)
         for indexpath in indexPaths{
             imageGalleryCollectionView.performBatchUpdates({
+                ImageGalleryTableViewController.RecentlyDeleted[self.title!] == nil ?
+                ImageGalleryTableViewController.RecentlyDeleted[self.title!] =
+                [cellImages[indexpath.item]] :
+            ImageGalleryTableViewController.RecentlyDeleted[self.title!]!.append(cellImages[indexpath.item])
                 cellImages.remove(at: indexpath.item)
                 imageGalleryCollectionView.deleteItems(at: [indexpath])
             })
@@ -286,6 +307,29 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
 
 
 
+
+
+
+/*
+ @IBAction func resizeCells(_ sender: UIPinchGestureRecognizer) {
+ if sender.state == .changed || sender.state == .ended{
+ DispatchQueue.main.async{ [weak self] in
+ if var itemSize = (self?.imageGalleryCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.itemSize.width{
+ itemSize = itemSize * sender.scale
+ if itemSize >= min((self?.imageGalleryCollectionView.bounds.width)!, (self?.imageGalleryCollectionView.bounds.height)!){
+ itemSize = min((self?.imageGalleryCollectionView.bounds.width)!, (self?.imageGalleryCollectionView.bounds.height)!)
+ }
+ let numberOfCellsPerRow: Int = Int((self?.imageGalleryCollectionView.bounds.width)! / itemSize) //get the max number of elemts with 100px width as a startup
+ itemSize = (self?.imageGalleryCollectionView.bounds.width)! / CGFloat(numberOfCellsPerRow) - 1
+ let layout = UICollectionViewFlowLayout()
+ layout.itemSize = CGSize(width: itemSize, height: itemSize)
+ layout.minimumInteritemSpacing = 1
+ layout.minimumLineSpacing = 1
+ }
+ }
+ }
+ }
+ */
 
 
 

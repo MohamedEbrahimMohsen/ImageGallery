@@ -126,7 +126,7 @@
             <objects>
                 <collectionViewController id="0HK-Ks-KMr" customClass="ImageGalleryCollectionViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="m5T-Cq-bVj">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -144,9 +144,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img" translatesAutoresizingMaskIntoConstraints="NO" id="oAj-q0-N8B">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img" translatesAutoresizingMaskIntoConstraints="NO" id="oAj-q0-N8B">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="f1s-Iv-7VU">
                                             <rect key="frame" x="8" y="8" width="20" height="20"/>
@@ -169,6 +168,10 @@
                                 </view>
                                 <constraints>
                                     <constraint firstItem="f1s-Iv-7VU" firstAttribute="top" secondItem="tR5-dT-3R0" secondAttribute="top" constant="8" id="2Xn-SK-eyy"/>
+                                    <constraint firstItem="oAj-q0-N8B" firstAttribute="top" secondItem="tR5-dT-3R0" secondAttribute="top" id="6Lo-Hg-Fk4"/>
+                                    <constraint firstAttribute="bottom" secondItem="oAj-q0-N8B" secondAttribute="bottom" id="Bjf-hs-fNb"/>
+                                    <constraint firstAttribute="trailing" secondItem="oAj-q0-N8B" secondAttribute="trailing" id="Ry1-aT-yct"/>
+                                    <constraint firstItem="oAj-q0-N8B" firstAttribute="leading" secondItem="tR5-dT-3R0" secondAttribute="leading" id="vdf-rT-Dcb"/>
                                     <constraint firstItem="f1s-Iv-7VU" firstAttribute="leading" secondItem="tR5-dT-3R0" secondAttribute="leading" constant="8" id="zuv-T8-pj5"/>
                                 </constraints>
                                 <connections>
@@ -178,7 +181,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DropPlaceholderCell" id="MpO-Eb-ZkP" customClass="CollectionViewCell">
-                                <rect key="frame" x="175" y="0.0" width="150" height="150"/>
+                                <rect key="frame" x="184.5" y="0.0" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
@@ -235,11 +238,11 @@
             <objects>
                 <viewController id="J5D-W8-1xA" customClass="ImageDetailsViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vqF-yD-Uj1">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="703.5" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p3M-kO-rg0">
-                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                                <rect key="frame" x="0.0" y="64" width="703.5" height="704"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="C3B-Sz-6hx">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -297,7 +300,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="LTu-hy-wFD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nt3-IC-7Z5">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="703.5" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -314,6 +317,6 @@
         <image name="img" width="960" height="447"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gL7-OC-yg7"/>
+        <segue reference="sqD-hM-gaO"/>
     </inferredMetricsTieBreakers>
 </document>
