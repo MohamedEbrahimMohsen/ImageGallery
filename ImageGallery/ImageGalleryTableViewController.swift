@@ -24,13 +24,13 @@ class ImageGalleryTableViewController: UITableViewController{
         var deletedObject: Any //deletedObject can be anything (Category, Image ,... )
     }
     
-    static func delete(object: Any , withIdentifer identifier: String){
-        if let deletedCategory = object as? categoryInfo{
-            addDeleted(category: deletedCategory)
-        }else if let deletedImage = object as? UIImage{
-            addDeleted(image: deletedImage, withCategoryName: identifier)
-        }
-    }
+//    static func delete(object: Any , withIdentifer identifier: String){
+//        if let deletedCategory = object as? categoryInfo{
+//            addDeleted(category: deletedCategory)
+//        }else if let deletedImage = object as? UIImage{
+//            addDeleted(image: deletedImage, withCategoryName: identifier)
+//        }
+//    }
     
     static func addDeleted(image:UIImage, withCategoryName name: String){
         recentlyDeleted.append(recentlyDeletedInfo(categoryIdentifier: name, deletedObject: image))
@@ -133,17 +133,56 @@ class ImageGalleryTableViewController: UITableViewController{
     }
     */
 
-    /*
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let revert = revertAction(at: indexPath)
+        return UISwipeActionsConfiguration(actions: [revert])
+    }
+    
+//    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let revert = revertAction(at: indexPath)
+//        return UISwipeActionsConfiguration(actions: [revert])
+//    }
+    
+    func revertAction(at indexPath: IndexPath) -> UIContextualAction{
+        let action = UIContextualAction(style: .destructive, title: "revert") { (action, view, completion) in
+            if indexPath.section == Constatns.RecentlyDeletedSectionNumber{
+                if let category = ImageGalleryTableViewController.recentlyDeleted[indexPath.row].deletedObject as? categoryInfo{
+                    DispatchQueue.main.async{ [weak self] in
+                        self?.categories.append(category)
+                        ImageGalleryTableViewController.recentlyDeleted.remove(at: indexPath.row)
+                        self?.tableView.reloadData()
+                    }
+                }
+            }
+        }
+        action.title = "Revert"
+        action.backgroundColor = #colorLiteral(red: 0.4500938654, green: 0.9813225865, blue: 0.4743030667, alpha: 1)
+        return action
+    }
+    
+    func revertImage(image: UIImage, withCategoryName name: String){
+        if categories.filter({$0.name == name}).count == 1{
+            for index in categories.indices{
+                if (categories[index].name == name){categories[index].categoryImages?.append(image)}
+            }
+        }
+    }
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
+            if indexPath.section == Constatns.NormalCategoriesSectionNumber{
+                let category = categories[indexPath.row]
+                ImageGalleryTableViewController.addDeleted(category: category)
+                categories.remove(at: indexPath.row)
+                tableView.reloadData()
+                //tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+        else if editingStyle == .insert { //Done using add + button
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -172,11 +211,21 @@ class ImageGalleryTableViewController: UITableViewController{
                 }
                 if let collectionViewController = destination as? ImageGalleryCollectionViewController{
                     if let indexPath = imageGalleryTableView.indexPath(for: tableViewCell){
-                        assert(categories.indices.contains(indexPath.row), "ImageGalleryTableViewController.Prepare: Row# \(indexPath.row) is not a valid row")
-                        let category = categories[indexPath.row]
-                        DispatchQueue.global(qos: .userInitiated).async{
-                            collectionViewController.cellImages = category.categoryImages!
-                            collectionViewController.title = category.name
+                        if indexPath.section == Constatns.NormalCategoriesSectionNumber{
+                            assert(categories.indices.contains(indexPath.row), "ImageGalleryTableViewController.Prepare: Row# \(indexPath.row) is not a valid row")
+                            let category = categories[indexPath.row]
+                            DispatchQueue.global(qos: .userInitiated).async{
+                                collectionViewController.cellImages = category.categoryImages!
+                                collectionViewController.title = category.name
+                            }
+                        }else{
+                            assert(ImageGalleryTableViewController.recentlyDeleted.indices.contains(indexPath.row), "ImageGalleryTableViewController.Prepare: Row# \(indexPath.row) is not a valid row")
+                            if let category = ImageGalleryTableViewController.recentlyDeleted[indexPath.row].deletedObject as? categoryInfo{
+                                DispatchQueue.global(qos: .userInitiated).async{
+                                    collectionViewController.cellImages = category.categoryImages!
+                                    collectionViewController.title = category.name
+                                }
+                            }
                         }
                     }
                 }
