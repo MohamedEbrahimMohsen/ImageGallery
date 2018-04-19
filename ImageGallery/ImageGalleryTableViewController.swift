@@ -10,31 +10,49 @@ import UIKit
 
 class ImageGalleryTableViewController: UITableViewController{
     
-    struct objects{
-        var sectionName: String
-        var sectionObjects: [categoryInfo]
+//    struct objects{
+//        var sectionName: String
+//        var sectionObjects: [categoryInfo]
+//    }
+//
+//    var tblViewObjects = [objects]()
+
+    static var recentlyDeleted = [recentlyDeletedInfo]()
+    
+    struct recentlyDeletedInfo{
+        var categoryIdentifier: String
+        var deletedObject: Any //deletedObject can be anything (Category, Image ,... )
     }
     
-    var tblViewObjects = [objects]()
-    var x = 7
-    static var RecentlyDeleted = [String:[UIImage]]()
-    func addDeleted(image:UIImage, withCategoryName name: String){
-        tblViewObjects[1].sectionObjects[0].categoryImages?.append(image)
+    static func delete(object: Any , withIdentifer identifier: String){
+        if let deletedCategory = object as? categoryInfo{
+            addDeleted(category: deletedCategory)
+        }else if let deletedImage = object as? UIImage{
+            addDeleted(image: deletedImage, withCategoryName: identifier)
+        }
     }
+    
+    static func addDeleted(image:UIImage, withCategoryName name: String){
+        recentlyDeleted.append(recentlyDeletedInfo(categoryIdentifier: name, deletedObject: image))
+    }
+    static func addDeleted(category:categoryInfo){
+        recentlyDeleted.append(recentlyDeletedInfo(categoryIdentifier: category.name, deletedObject: category))
+    }
+    
     func revertCategory(image: UIImage, withCategoryName name: String){
-        if tblViewObjects[0].sectionObjects.filter({$0.name == name}).count == 1{
-            for index in tblViewObjects[0].sectionObjects.indices{
-                if (tblViewObjects[0].sectionObjects[index].name == name){tblViewObjects[0].sectionObjects[index].categoryImages?.append(image)}
+        if categories.filter({$0.name == name}).count == 1{
+            for index in categories.indices{
+                if (categories[index].name == name){categories[index].categoryImages?.append(image)}
             }
         }
     }
     @IBOutlet var imageGalleryTableView: UITableView!
     @IBAction func addNewCategory(_ sender: UIBarButtonItem) {
-        tblViewObjects[0].sectionObjects.append(categoryInfo(image: UIImage(named: "img"), name: "Untitled".madeUnique(withRespectTo: tblViewObjects[0].sectionObjects), number: 1400, categoryImages: []))
+        categories.append(categoryInfo(image: UIImage(named: "img"), name: "Untitled".madeUnique(withRespectTo: categories), number: 1400, categoryImages: []))
         imageGalleryTableView.reloadData()
     }
     
-    //private var categories = [categoryInfo]()
+    private var categories = [categoryInfo]()
 
     struct categoryInfo{
         var image: UIImage?
@@ -47,19 +65,13 @@ class ImageGalleryTableViewController: UITableViewController{
         super.viewDidLoad()
         imageGalleryTableView.delegate = self
         imageGalleryTableView.dataSource = self
-        tblViewObjects = [objects(sectionName: "", sectionObjects: []) , objects(sectionName: "Recently Deleted", sectionObjects: [])]
-        tblViewObjects[0].sectionObjects.append(contentsOf: [categoryInfo(image: UIImage(named: "img.jpg"), name: "My Photos", number: 1200,
-        categoryImages: [UIImage(named: "img.jpg")!,UIImage(named: "img2.jpg")!])])
-        tblViewObjects[0].sectionObjects.append(contentsOf: [categoryInfo(image: UIImage(named: "img2.jpg"), name: "Facebook", number: 1200,
-        categoryImages: [UIImage(named: "img.jpg")!,UIImage(named: "img2.jpg")!])])
-         tblViewObjects[0].sectionObjects.append(contentsOf: [categoryInfo(image: UIImage(named: "img2.jpg"), name: "Twiter", number: 1200,
-        categoryImages: [UIImage(named: "img.jpg")!,UIImage(named: "img2.jpg")!])])
-         tblViewObjects[0].sectionObjects.append(contentsOf: [categoryInfo(image: UIImage(named: "img3.jpg"), name: "Instagram", number: 1200,
-        categoryImages: [UIImage(named: "img.jpg")!,UIImage(named: "img2.jpg")!])])
-        
-        
-        tblViewObjects[1].sectionObjects.append(contentsOf: [categoryInfo(image: UIImage(named: "img3.jpg"), name: "Deleted Images", number: 1200,
-        categoryImages: [])])
+       
+        categories.append(categoryInfo(image: UIImage(named: "img.jpg"), name: "My Photos", number: 1400,
+        categoryImages: [UIImage(named: "img.jpg")!]))
+        categories.append(categoryInfo(image: UIImage(named: "img2.jpg"), name: "Facebook", number: 1200,
+        categoryImages: [UIImage(named: "img")!,UIImage(named: "img2.jpg")!]))
+        categories.append(categoryInfo(image: UIImage(named: "img3.jpg"), name: "Instagram", number: 2400,
+        categoryImages: [UIImage(named: "img")!,UIImage(named: "img2.jpg")!,UIImage(named: "img3.jpg")!]))
     }
 
     override func viewWillLayoutSubviews() {
@@ -75,26 +87,43 @@ class ImageGalleryTableViewController: UITableViewController{
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return tblViewObjects.count
+        return 2 //we have only two sections one for All and one only for the recently deleted
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return tblViewObjects[section].sectionObjects.count
+        switch section{
+        case Constatns.NormalCategoriesSectionNumber: return categories.count
+        case Constatns.RecentlyDeletedSectionNumber: return ImageGalleryTableViewController.recentlyDeleted.count
+        default: return 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! ImageGalleryTableViewCell
         
         // Configure the cell...
-        cell.cellImage.image = tblViewObjects[indexPath.section].sectionObjects[indexPath.row].image
-        cell.cellName.text = tblViewObjects[indexPath.section].sectionObjects[indexPath.row].name
-        cell.cellNumber.text = String(tblViewObjects[indexPath.section].sectionObjects[indexPath.row].number)
+        if indexPath.section == Constatns.NormalCategoriesSectionNumber{
+            cell.cellImage.image = categories[indexPath.row].image
+            cell.cellName.text = categories[indexPath.row].name
+            cell.cellNumber.text = String(categories[indexPath.row].number)
+        }else if let deletedCategory = ImageGalleryTableViewController.recentlyDeleted[indexPath.row].deletedObject as? categoryInfo{
+                cell.cellImage.image = deletedCategory.image
+                cell.cellName.text = deletedCategory.name
+                cell.cellNumber.text = String(deletedCategory.number)
+        }else if let deletedImage = ImageGalleryTableViewController.recentlyDeleted[indexPath.row].deletedObject as? UIImage{
+//                let onlyImageCell = tableView.dequeueReusableCell(withIdentifier: "onlyImageTableViewCell", for: indexPath) as! OnlyImageTableViewCell
+//                onlyImageCell.imageCell.image = deletedImage
+//                return onlyImageCell
+            let onlyImageCell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as? OnlyImageTableViewCell
+            onlyImageCell?.cellImage.image = deletedImage
+            return onlyImageCell!
+            }
         return cell
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tblViewObjects[section].sectionName
+        if section == Constatns.RecentlyDeletedSectionNumber {return "Recently Deleted"} else {return ""}
     }
     /*
     // Override to support conditional editing of the table view.
@@ -143,8 +172,8 @@ class ImageGalleryTableViewController: UITableViewController{
                 }
                 if let collectionViewController = destination as? ImageGalleryCollectionViewController{
                     if let indexPath = imageGalleryTableView.indexPath(for: tableViewCell){
-                        assert(tblViewObjects[0].sectionObjects.indices.contains(indexPath.row), "ImageGalleryTableViewController.Prepare: Row# \(indexPath.row) is not a valid row")
-                        let category = tblViewObjects[0].sectionObjects[indexPath.row]
+                        assert(categories.indices.contains(indexPath.row), "ImageGalleryTableViewController.Prepare: Row# \(indexPath.row) is not a valid row")
+                        let category = categories[indexPath.row]
                         DispatchQueue.global(qos: .userInitiated).async{
                             collectionViewController.cellImages = category.categoryImages!
                             collectionViewController.title = category.name
@@ -155,6 +184,14 @@ class ImageGalleryTableViewController: UITableViewController{
         }
     }
 
+    
+    
+    
+    struct Constatns{
+        static var NormalCategoriesSectionNumber: Int = 0
+        static var RecentlyDeletedSectionNumber: Int = 1
+    }
+    
 }
 
 

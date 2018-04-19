@@ -22,7 +22,7 @@ class ImageGalleryTableViewCell: UITableViewCell {
         }
     }
     @IBOutlet weak var cellName: UILabel!
-    @IBOutlet weak var cellNumber: UILabel!
+    @IBOutlet weak var cellNumber: UILabel! //indicator of the number of photos inside the categoryFolder
 
     override func awakeFromNib() {
         super.awakeFromNib()

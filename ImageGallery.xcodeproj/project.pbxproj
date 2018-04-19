@@ -16,6 +16,7 @@
 		CDA06FD920856FED0056FA31 /* ImageGalleryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA06FD820856FED0056FA31 /* ImageGalleryTableViewController.swift */; };
 		CDA06FDB208580390056FA31 /* ImageGalleryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA06FDA208580390056FA31 /* ImageGalleryTableViewCell.swift */; };
 		CDA06FDF208588F40056FA31 /* img.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDA06FDE208588F40056FA31 /* img.jpg */; };
+		CDAB73B3208910A000728EF5 /* OnlyImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAB73B2208910A000728EF5 /* OnlyImageTableViewCell.swift */; };
 		CDBAAD0F2086DDE100602D11 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDBAAD0E2086DDE100602D11 /* Utilities.swift */; };
 		CDD528222087BA7900033DCF /* ImageDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD528212087BA7900033DCF /* ImageDetailsViewController.swift */; };
 		CDD528242087C0B400033DCF /* img2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDD528232087C0B400033DCF /* img2.jpg */; };
@@ -34,6 +35,7 @@
 		CDA06FD820856FED0056FA31 /* ImageGalleryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryTableViewController.swift; sourceTree = "<group>"; };
 		CDA06FDA208580390056FA31 /* ImageGalleryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryTableViewCell.swift; sourceTree = "<group>"; };
 		CDA06FDE208588F40056FA31 /* img.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img.jpg; sourceTree = "<group>"; };
+		CDAB73B2208910A000728EF5 /* OnlyImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyImageTableViewCell.swift; sourceTree = "<group>"; };
 		CDBAAD0E2086DDE100602D11 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		CDD528212087BA7900033DCF /* ImageDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailsViewController.swift; sourceTree = "<group>"; };
 		CDD528232087C0B400033DCF /* img2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img2.jpg; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				CDA06FDA208580390056FA31 /* ImageGalleryTableViewCell.swift */,
 				CDA06FD620856FD50056FA31 /* ImageGalleryCollectionViewController.swift */,
 				CDA06FD820856FED0056FA31 /* ImageGalleryTableViewController.swift */,
+				CDAB73B2208910A000728EF5 /* OnlyImageTableViewCell.swift */,
 				CDBAAD0E2086DDE100602D11 /* Utilities.swift */,
 				CDA06FDE208588F40056FA31 /* img.jpg */,
 				CDD528232087C0B400033DCF /* img2.jpg */,
@@ -177,6 +180,7 @@
 				CDA06FC220856D610056FA31 /* AppDelegate.swift in Sources */,
 				CDA06FD920856FED0056FA31 /* ImageGalleryTableViewController.swift in Sources */,
 				CDA06FD520856FB50056FA31 /* ImageGalleryCollectionViewCell.swift in Sources */,
+				CDAB73B3208910A000728EF5 /* OnlyImageTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

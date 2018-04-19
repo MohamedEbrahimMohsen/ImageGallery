@@ -82,12 +82,7 @@ class ImageGalleryCollectionViewController: UICollectionViewController, UICollec
         indexPaths = indexPaths.sorted(by: >)
         for indexpath in indexPaths{
             imageGalleryCollectionView.performBatchUpdates({
-                ImageGalleryTableViewController.RecentlyDeleted[self.title!] == nil ?
-                ImageGalleryTableViewController.RecentlyDeleted[self.title!] =
-                [cellImages[indexpath.item]] :
-            ImageGalleryTableViewController.RecentlyDeleted[self.title!]!.append(cellImages[indexpath.item])
-                let TVC = ImageGalleryTableViewController()
-                TVC.addDeleted(image: cellImages[indexpath.item], withCategoryName: self.title!)
+                ImageGalleryTableViewController.delete(object: cellImages[indexpath.item], withIdentifer: self.title!)
                 cellImages.remove(at: indexpath.item)
                 imageGalleryCollectionView.deleteItems(at: [indexpath])
             })

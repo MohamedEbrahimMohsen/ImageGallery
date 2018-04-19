@@ -21,7 +21,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZT-SS-qfu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-550" y="391"/>
+            <point key="canvasLocation" x="-1266" y="-34"/>
         </scene>
         <!--Image Gallery Table View Controller-->
         <scene sceneID="6DA-FE-k38">
@@ -100,6 +100,31 @@
                                     <segue destination="Eae-lW-QTf" kind="showDetail" identifier="showImagesForSelectedCategory" id="sqD-hM-gaO"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" restorationIdentifier="OnlyImageTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell2" rowHeight="50" id="exF-Vw-SQg" customClass="OnlyImageTableViewCell" customModule="ImageGallery" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="128" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="exF-Vw-SQg" id="eKc-ha-fxg">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WWb-fQ-RUn">
+                                            <rect key="frame" x="4" y="4" width="312" height="42"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="42" id="DbT-mh-YVd"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="WWb-fQ-RUn" firstAttribute="leading" secondItem="eKc-ha-fxg" secondAttribute="leading" constant="4" id="KoC-4c-I5n"/>
+                                        <constraint firstItem="WWb-fQ-RUn" firstAttribute="top" secondItem="eKc-ha-fxg" secondAttribute="top" constant="4" id="Ne3-bu-a07"/>
+                                        <constraint firstAttribute="trailing" secondItem="WWb-fQ-RUn" secondAttribute="trailing" constant="4" id="THb-Ct-7NW"/>
+                                        <constraint firstAttribute="bottom" secondItem="WWb-fQ-RUn" secondAttribute="bottom" constant="4" id="qEU-a7-lkG"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellImage" destination="WWb-fQ-RUn" id="H8Y-Z6-nz9"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="Ik1-Ux-gT8" id="FOz-je-OnM"/>
@@ -119,7 +144,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CTS-rE-ewg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1299.0234375" y="-398.4375"/>
+            <point key="canvasLocation" x="2002" y="-802"/>
         </scene>
         <!--Gallery-->
         <scene sceneID="ePb-PN-51F">
@@ -137,7 +162,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="CollectionViewCell" id="tR5-dT-3R0" customClass="ImageGalleryCollectionViewCell" customModule="ImageGallery" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="CollectionViewCell" id="tR5-dT-3R0" customClass="ImageGalleryCollectionViewCell" customModule="ImageGallery" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -145,7 +170,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img" translatesAutoresizingMaskIntoConstraints="NO" id="oAj-q0-N8B">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="150"/>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="f1s-Iv-7VU">
                                             <rect key="frame" x="8" y="8" width="20" height="20"/>
@@ -180,7 +205,7 @@
                                     <segue destination="J5D-W8-1xA" kind="show" identifier="showSelectedImage" id="bJd-KA-lFm"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DropPlaceholderCell" id="MpO-Eb-ZkP" customClass="CollectionViewCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="DropPlaceholderCell" id="MpO-Eb-ZkP" customClass="CollectionViewCell">
                                 <rect key="frame" x="184.5" y="0.0" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -188,7 +213,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="yZ2-d1-GJr">
-                                            <rect key="frame" x="57" y="57" width="37" height="37"/>
+                                            <rect key="frame" x="-18" y="57" width="37" height="37"/>
                                             <color key="color" red="0.45184272527694702" green="0.86246871948242188" blue="0.12720835208892822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </activityIndicatorView>
                                     </subviews>
@@ -231,7 +256,7 @@
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1240" y="509"/>
+            <point key="canvasLocation" x="2002" y="510"/>
         </scene>
         <!--Image Details View Controller-->
         <scene sceneID="wjF-bk-ztm">
@@ -273,7 +298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n3M-wC-NqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2002" y="509"/>
+            <point key="canvasLocation" x="3488" y="510"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IV0-36-k0I">
@@ -291,7 +316,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oHL-vo-okl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="574.8046875" y="-398.4375"/>
+            <point key="canvasLocation" x="575" y="-802"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Mw2-qE-s8S">
